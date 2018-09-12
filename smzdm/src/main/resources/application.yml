@@ -2,7 +2,7 @@ spring:
   velocity:
     suffix: .html
   datasource:
-    url: jdbc:mysql://localhost:3306/smzdm?sercerTimezone=GMT
+    url: jdbc:mysql://localhost:3306/smzdm?serverTimezone=GMT
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

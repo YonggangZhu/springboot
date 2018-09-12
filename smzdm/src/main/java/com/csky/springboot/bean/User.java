@@ -4,16 +4,14 @@ public class User {
     int id;
     String name;
     String password;
-    String email;
     String headUrl;
 
     public User(){}
 
-    public User(int id, String name, String password, String email, String headUrl) {
+    public User(int id, String name, String password, String headUrl) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.email = email;
         this.headUrl = headUrl;
     }
 
@@ -31,14 +29,6 @@ public class User {
 
     public void setHeadUrl(String headUrl) {
         this.headUrl = headUrl;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getName() {
@@ -63,7 +53,6 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
                 ", headUrl='" + headUrl + '\'' +
                 '}';
     }

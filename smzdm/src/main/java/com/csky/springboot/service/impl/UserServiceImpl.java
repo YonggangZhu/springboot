@@ -37,8 +37,7 @@ public class UserServiceImpl implements UserServiceinterface {
     }
 
     @Override
-    public User findUserByName(String username) {
-        User user=dao.findUserByName(username);
-        return user;
+    public User findUserByUser(User user) {
+        return dao.findUserByUser(user);
     }
 }

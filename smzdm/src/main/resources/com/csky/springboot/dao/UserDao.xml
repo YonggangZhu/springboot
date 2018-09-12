@@ -6,4 +6,7 @@
     <select id="findUserById" resultType="com.csky.springboot.bean.User">
         select * from `user` where uid=#{id};
     </select>
+    <insert id="register" parameterType="com.csky.springboot.bean.User" >
+        insert into `user` values(null,#{name},#{password},#{headUrl})
+    </insert>
 </mapper>

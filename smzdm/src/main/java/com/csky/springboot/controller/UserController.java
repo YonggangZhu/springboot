@@ -1,34 +1,51 @@
 package com.csky.springboot.controller;
 
-import com.csky.springboot.bean.News;
 import com.csky.springboot.bean.User;
-import com.csky.springboot.bean.Vo;
+import com.csky.springboot.service.UserServiceinterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
 
-    @RequestMapping("/find")
-    public String find(Model model){
-        User user=new User(01,"zs","123","123","123");
+    @Autowired
+    UserServiceinterface userService;
 
-        News news=new News(01,1,2,"www.baidu.com","aa",null,new Date());
+    @RequestMapping("/login")
+    @ResponseBody
+    public Map login(String username, String password, String rember, HttpSession session){
+
+        User user=new User();
+        user.setPassword(password);
+        user.setName(username);
+
+        user=userService.findUserByUser(user);
+        Map<String,Object> map=new HashMap<>();
+        if (user==null){
+            map.put("code",-1);
+            map.put("msgname","用户名错误");
+        }else {
+            map.put("code",0);
+            map.put("user",user);
+        }
+
+        if(rember.equals("1")){
+            session.setAttribute("user",user);
+        }
+
+        return map;
+    }
 
 
-        Vo vo=new Vo();
-        vo.setUser(user);
-        vo.setNews(news);
-        vo.setLike(10);
-
-        List<Vo> list=new ArrayList<>();
-        list.add(vo);
-
-        model.addAttribute("vos",list);
-        return "home";
+    @RequestMapping("/reg")
+    @ResponseBody
+    public Map register(String username, String password){
+        return userService.registerUser(username,password);
     }
 }
